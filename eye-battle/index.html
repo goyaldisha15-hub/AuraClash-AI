@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Eye Battle: The Eyebrow Duel</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <video id="cam" playsinline muted hidden></video>
+    <section id="welcome" class="screen active">
+      <h1>EYE BATTLE</h1>
+      <h2>The Eyebrow Duel</h2>
+      <p>Two players. One webcam. No hands.</p>
+      <p class="how">
+        Raise brows: attack &nbsp;|&nbsp; Raise twice fast: special
+        &nbsp;|&nbsp; Close eyes: shield
+      </p>
+      <button id="startBtn">START BATTLE</button>
+    </section>
+    <section id="calib" class="screen">
+      <h2>Camera &amp; calibration</h2>
+      <p id="calMsg">Click Start to allow the camera.</p>
+      <div class="pair">
+        <div class="cp">
+          <canvas id="cal1" width="320" height="360"></canvas
+          ><b>Player 1 (left)</b><span id="cs1">no face</span>
+        </div>
+        <div class="cp">
+          <canvas id="cal2" width="320" height="360"></canvas
+          ><b>Player 2 (right)</b><span id="cs2">no face</span>
+        </div>
+      </div>
+      <button id="calBtn" disabled>CALIBRATE (relax your brows)</button>
+    </section>
+    <section id="names" class="screen">
+      <h2>Who is fighting?</h2>
+      <div class="pair">
+        <div class="cp">
+          <input id="n1" value="Player 1" maxlength="12" /><select
+            id="m1"
+            aria-label="Player 1 control"
+          >
+            <option value="brow">Eyebrow control</option>
+            <option value="mouth">Mouth control</option>
+          </select>
+        </div>
+        <div class="cp">
+          <input id="n2" value="Player 2" maxlength="12" /><select
+            id="m2"
+            aria-label="Player 2 control"
+          >
+            <option value="brow">Eyebrow control</option>
+            <option value="mouth">Mouth control</option>
+          </select>
+        </div>
+      </div>
+      <p class="how">
+        Eyebrow: raise brows = attack, twice fast = special. Mouth: open wide =
+        attack, twice fast = special. Both: close eyes = shield.
+      </p>
+      <button id="goBtn">ENTER ARENA</button>
+    </section>
+    <section id="arena" class="screen">
+      <canvas id="stage" width="1280" height="640"></canvas>
+      <div class="cams">
+        <div class="cam">
+          <canvas id="cv1" width="320" height="360"></canvas
+          ><i id="st1">READY</i>
+        </div>
+        <div class="cam">
+          <canvas id="cv2" width="320" height="360"></canvas
+          ><i id="st2">READY</i>
+        </div>
+      </div>
+      <div id="roundRes" hidden></div>
+    </section>
+    <section id="final" class="screen">
+      <h2>MATCH OVER</h2>
+      <canvas id="card" width="640" height="360"></canvas>
+      <div>
+        <button id="againBtn">PLAY AGAIN</button>
+        <button id="shareBtn">SHARE RESULT</button>
+      </div>
+    </section>
+    <script type="module" src="game.js"></script>
+  </body>
+</html>
