@@ -817,6 +817,35 @@ export default function App() {
     SFX.mute = !v;
     if (v) SFX.count(); // little preview beep when sound is switched on
   };
+  const [fs, setFs] = useState(false);
+  const toggleFs = () => {
+    const d = document,
+      el = d.documentElement;
+    const cur = d.fullscreenElement || d.webkitFullscreenElement;
+    try {
+      if (cur) (d.exitFullscreen || d.webkitExitFullscreen).call(d);
+      else (el.requestFullscreen || el.webkitRequestFullscreen).call(el);
+    } catch {}
+  };
+  useEffect(() => {
+    const on = () =>
+      setFs(!!(document.fullscreenElement || document.webkitFullscreenElement));
+    const key = (e) => {
+      if (
+        (e.key === "f" || e.key === "F") &&
+        !/INPUT|TEXTAREA/.test(e.target.tagName)
+      )
+        toggleFs();
+    };
+    document.addEventListener("fullscreenchange", on);
+    document.addEventListener("webkitfullscreenchange", on);
+    window.addEventListener("keydown", key);
+    return () => {
+      document.removeEventListener("fullscreenchange", on);
+      document.removeEventListener("webkitfullscreenchange", on);
+      window.removeEventListener("keydown", key);
+    };
+  }, []);
   const [names, setNames] = useState(["", ""]);
   const setName = (i, v) => {
     const n = [...names];
@@ -1762,6 +1791,15 @@ export default function App() {
             </div>
           </section>
         )}
+
+        <button
+          className="fsbtn"
+          onClick={toggleFs}
+          aria-label={fs ? "Exit full screen" : "Enter full screen"}
+          title={(fs ? "Exit full screen" : "Full screen") + " (F)"}
+        >
+          {fs ? "🡼" : "⛶"}
+        </button>
       </div>
     </main>
   );
