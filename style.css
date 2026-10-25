@@ -1363,3 +1363,40 @@ body {
 .screen.setup.light .row {
   margin-top: 0.4cqw;
 }
+
+/* ===== Full screen button ===== */
+.fsbtn {
+  position: absolute;
+  right: 1.2cqw;
+  bottom: 1.2cqw;
+  z-index: 50;
+  width: 3.6cqw;
+  height: 3.6cqw;
+  min-width: 32px;
+  min-height: 32px;
+  display: grid;
+  place-items: center;
+  font-size: 2cqw;
+  line-height: 1;
+  color: #fff;
+  background: rgba(5, 3, 24, 0.55);
+  border: 0.15cqw solid #ffffff55;
+  border-radius: 0.9cqw;
+  opacity: 0.7;
+  transition:
+    opacity 0.18s,
+    transform 0.18s;
+}
+.fsbtn:hover {
+  opacity: 1;
+  transform: scale(1.08);
+}
+:fullscreen main,
+:-webkit-full-screen main {
+  padding: 0;
+}
+:fullscreen .stage,
+:-webkit-full-screen .stage {
+  width: min(100vw, 100vh * 16 / 9);
+  border-radius: 0;
+}
